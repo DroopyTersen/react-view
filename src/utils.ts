@@ -79,7 +79,8 @@ export const buildPropsObj = (
 // while debouncing top-level state updates that are slow
 export function useValueDebounce<T>(
   globalVal: T,
-  globalSet: (val: T) => void
+  globalSet: (val: T) => void,
+  shouldSkip = false
 ): [T, (val: T) => void] {
   const [val, set] = React.useState(globalVal);
 
@@ -95,7 +96,7 @@ export function useValueDebounce<T>(
   }, [val]);
 
   React.useEffect(() => {
-    set(globalVal);
+    if (!shouldSkip) set(globalVal);
   }, [globalVal]);
 
   return [val, set];

@@ -69,7 +69,11 @@ const Editor: React.FC<TEditorProps> = ({
     },
   };
 
-  const [code, setCode] = useValueDebounce<string>(globalCode, onChange);
+  const [code, setCode] = useValueDebounce<string>(
+    globalCode,
+    onChange,
+    focused
+  );
 
   return (
     <div
